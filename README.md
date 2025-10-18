@@ -332,9 +332,6 @@ The Python FastAPI backend provides:
 - **XSS Protection** - React's built-in protection
 - **CORS** - Configured for production domains
 
-### Reporting Security Issues
-
-Email: security@agrivision-ai.com
 
 ---
 
