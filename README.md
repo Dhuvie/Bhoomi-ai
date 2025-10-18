@@ -385,7 +385,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 **AgriVision AI Team**
 
-[GitHub](https://github.com/Dhuvie/agrivision-ai) • 
+[GitHub](https://github.com/Dhuvie/agrivision-ai) 
 </div>
 
 ---
