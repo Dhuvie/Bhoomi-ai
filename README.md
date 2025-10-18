@@ -12,7 +12,7 @@
 
 **Empowering farmers with AI-driven insights for sustainable and profitable agriculture**
 
-[Features](#-features) • [Demo](#-demo) • [Installation](#-installation) • [Tech Stack](#-tech-stack) • [Contributing](#-contributing)
+[Features](#-features) • [Installation](#-installation) • [Tech Stack](#-tech-stack) • [Contributing](#-contributing)
 
 </div>
 
@@ -146,8 +146,8 @@ npm start
 ### AI & Backend
 
 - **[Google Gemini](https://ai.google.dev/)** - Generative AI models
-- **[Genkit](https://firebase.google.com/docs/genkit)** - AI framework
 - **Custom ML Model** - Crop prediction (Python/FastAPI)
+- **FastAPI** - Python backend for ML predictions
 
 ### State Management
 
