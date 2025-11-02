@@ -4,10 +4,10 @@ import { geminiGenerateVision, parseDataUrl, hasGeminiKey } from "@/lib/gemini";
 /**
  * POST /api/ai/diagnose
  * Real pest & disease diagnosis.
- * Uses Gemini 1.5 Flash (vision).
+ * Uses Gemini 3.1 Flash Lite (vision).
  */
 
-const MODEL_VERSION = "bhoomi-vision-gemini-1.5-flash";
+const MODEL_VERSION = "bhoomi-vision-gemini-3.1-flash-lite";
 
 const localeNames: Record<string, string> = {
   en: "English", hi: "Hindi (Devanagari)", or: "Odia", te: "Telugu",

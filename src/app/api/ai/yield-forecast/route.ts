@@ -3,10 +3,10 @@ import { geminiGenerateText, hasGeminiKey } from "@/lib/gemini";
 
 /**
  * POST /api/ai/yield-forecast
- * Uses Gemini 1.5 Flash.
+ * Uses Gemini 3.1 Flash Lite.
  */
 
-const MODEL_VERSION = "bhoomi-yield-gemini-1.5-flash";
+const MODEL_VERSION = "bhoomi-yield-gemini-3.1-flash-lite";
 
 const cropTypicalYields: Record<string, { low: number; high: number }> = {
   rice: { low: 15, high: 28 }, cotton: { low: 6, high: 12 }, groundnut: { low: 7, high: 12 },

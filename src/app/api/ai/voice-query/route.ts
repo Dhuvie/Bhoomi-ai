@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { geminiGenerateText, hasGeminiKey } from "@/lib/gemini";
 
-const MODEL_VERSION = "bhoomi-voice-gemini-1.5-flash";
+const MODEL_VERSION = "bhoomi-voice-gemini-3.1-flash-lite";
 
 export async function POST(req: NextRequest) {
   const startTime = Date.now();

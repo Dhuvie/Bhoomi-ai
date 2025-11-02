@@ -7,7 +7,7 @@
 
   [![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-  [![Gemini AI](https://img.shields.io/badge/Google_Gemini-Flash_1.5-blue?style=for-the-badge&logo=google)](https://ai.google.dev/)
+  [![Gemini AI](https://img.shields.io/badge/Google_Gemini-Flash_Lite_3.1-blue?style=for-the-badge&logo=google)](https://ai.google.dev/)
   [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
   *Empowering precision agriculture through real-time analytics, machine learning algorithms, and intuitive system design.*
@@ -93,7 +93,7 @@ The Bhoomi interface is designed for maximum clarity, data density, and operatio
 Bhoomi relies on a scalable, serverless architecture optimized for high availability and low latency data processing.
 
 * **Core Framework**: Next.js (App Router paradigm) enabling hybrid static and server-rendered operations.
-* **Artificial Intelligence Engine**: Google Gemini API (specifically the 1.5 Flash model) powers the platform.
+* **Artificial Intelligence Engine**: Google Gemini API (specifically the 3.1 Flash Lite model) powers the platform.
   * *Vision Tasks*: Processes localized crop imagery for immediate pathogen detection.
   * *Natural Language Processing*: Advanced prompt engineering structures complex, multi-variable contexts (weather telemetry, soil metrics, voice inputs) into standardized JSON agronomy plans.
 * **Frontend Infrastructure**: Radix primitives combined with Tailwind CSS for highly performant, accessible, and responsive interface components.

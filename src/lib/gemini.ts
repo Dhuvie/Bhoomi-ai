@@ -12,7 +12,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 declare const process: { env: Record<string, string | undefined> };
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
-const MODEL_NAME = "gemini-1.5-flash";
+const MODEL_NAME = "gemini-3.1-flash-lite";
 
 let genAIClient: GoogleGenerativeAI | null = null;
 
