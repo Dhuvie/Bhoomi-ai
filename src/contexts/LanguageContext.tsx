@@ -1,53 +1,64 @@
-// src/contexts/LanguageContext.tsx
-'use client';
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { translations, Translation } from '@/lib/translations';
+"use client";
 
-type Language = {
-  code: string;
-  name: string;
-};
+import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
+import { Locale, t as translate, TranslationKey, LOCALES } from "@/lib/i18n";
 
-export const languages: Language[] = [
-  { code: 'en', name: 'English' },
-  { code: 'hi', name: 'Hindi (हिन्दी)' },
-  { code: 'or', name: 'Odia (ଓଡ଼ିଆ)' },
-  { code: 'te', name: 'Telugu (తెలుగు)' },
-];
-
-interface LanguageContextType {
-  language: Language;
-  setLanguage: (language: Language) => void;
-  translations: Translation;
+interface LanguageContextValue {
+  locale: Locale;
+  setLocale: (l: Locale) => void;
+  t: (key: TranslationKey) => string;
+  localeLabel: string;
+  locales: typeof LOCALES;
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>(languages[0]);
-  const [currentTranslations, setCurrentTranslations] = useState<Translation>(translations.en);
+const STORAGE_KEY = "bhoomi.locale";
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const [locale, setLocaleState] = useState<Locale>("en");
 
   useEffect(() => {
-    setCurrentTranslations(translations[language.code as keyof typeof translations]);
-  }, [language]);
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY) as Locale | null;
+      if (saved && ["en", "hi", "or", "te"].includes(saved)) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setLocaleState(saved);
+      }
+    } catch {
+      // ignore — default to en
+    }
+  }, []);
 
-  const value = {
-    language,
-    setLanguage,
-    translations: currentTranslations,
+  const setLocale = useCallback((l: Locale) => {
+    setLocaleState(l);
+    try {
+      localStorage.setItem(STORAGE_KEY, l);
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
+    const el = document.documentElement;
+    el.lang = locale;
+  }, [locale]);
+
+  const t = useCallback((key: TranslationKey) => translate(locale, key), [locale]);
+
+  const value: LanguageContextValue = {
+    locale,
+    setLocale,
+    t,
+    localeLabel: LOCALES.find((l) => l.code === locale)?.label ?? "English",
+    locales: LOCALES,
   };
 
-  return (
-    <LanguageContext.Provider value={value}>
-      {children}
-    </LanguageContext.Provider>
-  );
-};
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+}
 
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
-};
+export function useLanguage() {
+  const ctx = useContext(LanguageContext);
+  if (!ctx) throw new Error("useLanguage must be used within LanguageProvider");
+  return ctx;
+}

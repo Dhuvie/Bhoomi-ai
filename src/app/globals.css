@@ -1,328 +1,609 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "leaflet/dist/leaflet.css";
 
-@layer base {
-  :root {
-    --background: 240 10% 98%;
-    --foreground: 240 5% 15%;
-    --card: 240 0% 100%;
-    --card-foreground: 240 5% 15%;
-    --popover: 240 0% 100%;
-    --popover-foreground: 240 5% 15%;
-    --primary: 142 70% 45%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 240 5% 90%;
-    --secondary-foreground: 240 5% 25%;
-    --muted: 240 5% 93%;
-    --muted-foreground: 240 5% 45%;
-    --accent: 142 60% 95%;
-    --accent-foreground: 142 70% 25%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 240 5% 88%;
-    --input: 240 5% 92%;
-    --ring: 142 70% 45%;
-    --radius: 0.8rem;
-    
-    --sidebar-background: 240 5% 96%;
-    --sidebar-foreground: 240 5% 25%;
-    --sidebar-primary: 142 70% 45%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 5% 90%;
-    --sidebar-accent-foreground: 240 5% 10%;
-    --sidebar-border: 240 5% 90%;
-    --sidebar-ring: 142 70% 45%;
-    
-    --chart-1: 142 70% 45%;
-    --chart-2: 221 83% 53%;
-    --chart-3: 43 74% 66%;
-    --chart-4: 27 87% 67%;
-    --chart-5: 197 37% 24%;
+@custom-variant dark (&:is(.dark *));
 
-  }
+/* =========================================================
+   BHOOMI — Field Instrument Design Tokens
+   Soil neutrals, crop greens, sky/water blue, signal colors
+   ========================================================= */
 
-  .dark {
-    --background: 240 6% 8%;
-    --foreground: 0 0% 98%;
-    --card: 240 6% 10%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 6% 10%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 142 65% 50%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 240 4% 18%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 4% 16%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 240 4% 20%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 4% 18%;
-    --input: 240 4% 20%;
-    --ring: 142 65% 50%;
+:root {
+  /* Soil neutrals — warm, not slate gray */
+  --soil-50:  #FAF7F2;
+  --soil-100: #F0EAE0;
+  --soil-200: #E1D7C7;
+  --soil-300: #C7B8A2;
+  --soil-400: #A6937A;
+  --soil-500: #8A7660;
+  --soil-600: #6E5D4A;
+  --soil-700: #564939;
+  --soil-800: #3D3327;
+  --soil-900: #241E17;
 
-    --sidebar-background: 240 6% 10%;
-    --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 142 65% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 4% 18%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 240 4% 18%;
-    --sidebar-ring: 142 65% 50%;
+  /* Crop green — primary */
+  --crop-50:  #F1F8F0;
+  --crop-100: #DCEEDA;
+  --crop-200: #B9DDB6;
+  --crop-300: #8FC98A;
+  --crop-400: #66B15E;
+  --crop-500: #468C40;
+  --crop-600: #367232;
+  --crop-700: #2B5A28;
+  --crop-800: #23481F;
+  --crop-900: #1B3818;
 
-    --chart-1: 142 65% 50%;
-    --chart-2: 221 83% 63%;
-    --chart-3: 43 74% 56%;
-    --chart-4: 27 87% 57%;
-    --chart-5: 197 37% 54%;
-  }
+  /* Sky/water blue — weather & irrigation data ONLY */
+  --sky-400: #6FA8DC;
+  --sky-500: #3F7FBF;
+  --sky-600: #2E5F94;
+
+  /* Signal amber — caution */
+  --amber-400: #F2B84B;
+  --amber-500: #E0982A;
+  --amber-600: #B87515;
+
+  /* Signal red — danger */
+  --red-500: #C7402D;
+  --red-600: #A32F1F;
+
+  /* Categorical data set (colorblind-safe) */
+  --data-1: #E0982A;
+  --data-2: #468C40;
+  --data-3: #3F7FBF;
+  --data-4: #A32F1F;
+  --data-5: #6E5D4A;
+  --data-6: #7A5CA8;
+
+  /* Spacing — 4px base scale */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadow — single light source, top-left, warm-tinted */
+  --shadow-sm: 0 1px 3px rgba(36,30,23,0.06);
+  --shadow-md: 0 2px 8px rgba(36,30,23,0.08);
+  --shadow-lg: 0 8px 24px rgba(36,30,23,0.12);
+  --shadow-glass: 0 8px 32px rgba(36,30,23,0.16), inset 0 1px 0 rgba(255,255,255,0.15);
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 400ms;
+  --duration-reveal: 700ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Fonts */
+  --font-heading-en: 'Space Grotesk', sans-serif;
+  --font-heading-in: 'Noto Sans Devanagari', 'Noto Sans Oriya', 'Noto Sans Telugu', sans-serif;
+  --font-body: 'Noto Sans', 'Noto Sans Devanagari', 'Noto Sans Oriya', 'Noto Sans Telugu', sans-serif;
+
+  /* ============== Light Mode (default — outdoor glare is real) ============== */
+  --background: var(--soil-50);
+  --foreground: var(--soil-900);
+  --card: #FFFFFF;
+  --card-foreground: var(--soil-900);
+  --popover: #FFFFFF;
+  --popover-foreground: var(--soil-900);
+  --primary: var(--crop-500);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--soil-100);
+  --secondary-foreground: var(--soil-800);
+  --muted: var(--soil-100);
+  --muted-foreground: var(--soil-600);
+  --accent: var(--crop-100);
+  --accent-foreground: var(--crop-800);
+  --destructive: var(--red-500);
+  --border: var(--soil-200);
+  --input: var(--soil-200);
+  --ring: var(--crop-500);
+  --chart-1: var(--data-1);
+  --chart-2: var(--data-2);
+  --chart-3: var(--data-3);
+  --chart-4: var(--data-4);
+  --chart-5: var(--data-5);
+  --chart-6: var(--data-6);
+  --sidebar: var(--soil-100);
+  --sidebar-foreground: var(--soil-900);
+  --sidebar-primary: var(--crop-500);
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: var(--soil-200);
+  --sidebar-accent-foreground: var(--soil-900);
+  --sidebar-border: var(--soil-200);
+  --sidebar-ring: var(--crop-500);
+
+  --radius: var(--radius-lg);
+
+  /* Ambient background gradient — adjusts to weather */
+  --ambient-hue: 30;
+  --ambient-saturation: 15%;
+  --ambient-lightness: 96%;
+  --ambient-overlay: rgba(255, 220, 150, 0.08);
+}
+
+.dark {
+  --background: var(--soil-900);
+  --foreground: var(--soil-50);
+  --card: var(--soil-800);
+  --card-foreground: var(--soil-50);
+  --popover: var(--soil-800);
+  --popover-foreground: var(--soil-50);
+  --primary: var(--crop-400); /* shifts brighter for contrast on dark */
+  --primary-foreground: var(--soil-900);
+  --secondary: var(--soil-700);
+  --secondary-foreground: var(--soil-50);
+  --muted: var(--soil-700);
+  --muted-foreground: var(--soil-300);
+  --accent: var(--crop-800);
+  --accent-foreground: var(--crop-100);
+  --destructive: var(--red-500);
+  --border: var(--soil-700);
+  --input: var(--soil-700);
+  --ring: var(--crop-400);
+  --sidebar: var(--soil-800);
+  --sidebar-foreground: var(--soil-50);
+  --sidebar-primary: var(--crop-400);
+  --sidebar-primary-foreground: var(--soil-900);
+  --sidebar-accent: var(--soil-700);
+  --sidebar-accent-foreground: var(--soil-50);
+  --sidebar-border: var(--soil-700);
+  --sidebar-ring: var(--crop-400);
+
+  --ambient-lightness: 12%;
+  --ambient-overlay: rgba(60, 80, 40, 0.10);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Bhoomi semantic tokens mapped to Tailwind */
+  --color-soil-50: var(--soil-50);
+  --color-soil-100: var(--soil-100);
+  --color-soil-200: var(--soil-200);
+  --color-soil-300: var(--soil-300);
+  --color-soil-400: var(--soil-400);
+  --color-soil-500: var(--soil-500);
+  --color-soil-600: var(--soil-600);
+  --color-soil-700: var(--soil-700);
+  --color-soil-800: var(--soil-800);
+  --color-soil-900: var(--soil-900);
+
+  --color-crop-50: var(--crop-50);
+  --color-crop-100: var(--crop-100);
+  --color-crop-200: var(--crop-200);
+  --color-crop-300: var(--crop-300);
+  --color-crop-400: var(--crop-400);
+  --color-crop-500: var(--crop-500);
+  --color-crop-600: var(--crop-600);
+  --color-crop-700: var(--crop-700);
+  --color-crop-800: var(--crop-800);
+  --color-crop-900: var(--crop-900);
+
+  --color-sky-400: var(--sky-400);
+  --color-sky-500: var(--sky-500);
+  --color-sky-600: var(--sky-600);
+
+  --color-amber-400: var(--amber-400);
+  --color-amber-500: var(--amber-500);
+  --color-amber-600: var(--amber-600);
+
+  --color-signal-red: var(--red-500);
+  --color-signal-red-dark: var(--red-600);
+
+  --font-sans: var(--font-body);
+  --font-heading-en: var(--font-heading-en);
+  --font-heading-in: var(--font-heading-in);
+  --font-mono: ui-monospace, monospace;
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: var(--border);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100dvh;
   }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading-en);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  /* Hindi/Odia/Telugu headings use Noto weight contrast instead of Space Grotesk */
+  :lang(hi) h1, :lang(hi) h2, :lang(hi) h3, :lang(hi) h4, :lang(hi) h5, :lang(hi) h6,
+  :lang(or) h1, :lang(or) h2, :lang(or) h3, :lang(or) h4, :lang(or) h5, :lang(or) h6,
+  :lang(te) h1, :lang(te) h2, :lang(te) h3, :lang(te) h4, :lang(te) h5, :lang(te) h6 {
+    font-family: var(--font-heading-in);
+  }
+  /* Tabular numerals for all data — yield, NPK, prices, dates */
+  .tabular-nums,
+  [data-tabular] {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+  /* Hide scrollbar utility */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Custom scrollbar — warm soil tone */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--soil-300);
+    border-radius: var(--radius-full);
+  }
+  .dark ::-webkit-scrollbar-thumb { background: var(--soil-700); }
 }
 
+/* ============ Field-instrument utilities ============ */
 @layer utilities {
-  /* Premium Glass morphism effects */
-  .glass-card {
-    @apply backdrop-blur-2xl bg-white/80 dark:bg-gray-900/80 border border-white/30 dark:border-gray-700/30 shadow-2xl;
-  }
-  
   .glass-panel {
-    @apply backdrop-blur-xl bg-card/60 border-border/60 shadow-lg;
+    background: color-mix(in srgb, var(--soil-50) 70%, transparent);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    box-shadow: var(--shadow-glass);
+    border: 1px solid color-mix(in srgb, var(--soil-200) 60%, transparent);
+  }
+  .dark .glass-panel {
+    background: color-mix(in srgb, var(--soil-800) 70%, transparent);
+    border-color: color-mix(in srgb, var(--soil-700) 60%, transparent);
   }
 
-  .glass-ultra {
-    @apply backdrop-blur-3xl bg-white/90 dark:bg-gray-900/90 border-2 border-white/40 dark:border-gray-700/40 shadow-2xl;
-  }
-  
-  /* Premium Gradient utilities */
-  .gradient-primary {
-    @apply bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600;
-  }
-  
-  .gradient-secondary {
-    @apply bg-gradient-to-br from-blue-400 via-cyan-500 to-sky-600;
-  }
-  
-  .gradient-accent {
-    @apply bg-gradient-to-br from-amber-400 via-orange-500 to-red-600;
-  }
-  
-  .gradient-warm {
-    @apply bg-gradient-to-br from-rose-400 via-pink-500 to-fuchsia-600;
-  }
-  
-  .gradient-purple {
-    @apply bg-gradient-to-br from-purple-400 via-violet-500 to-indigo-600;
-  }
-  
-  .gradient-teal {
-    @apply bg-gradient-to-br from-teal-400 via-cyan-500 to-blue-600;
+  /* Seed-packet typography — uppercase, letter-spaced, tiny */
+  .seed-label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1.2;
   }
 
-  .gradient-mesh {
-    background: 
-      radial-gradient(at 40% 20%, hsla(142, 70%, 45%, 0.3) 0px, transparent 50%),
-      radial-gradient(at 80% 0%, hsla(221, 83%, 53%, 0.3) 0px, transparent 50%),
-      radial-gradient(at 0% 50%, hsla(43, 74%, 66%, 0.3) 0px, transparent 50%),
-      radial-gradient(at 80% 50%, hsla(27, 87%, 67%, 0.3) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, hsla(197, 37%, 24%, 0.3) 0px, transparent 50%),
-      radial-gradient(at 80% 100%, hsla(142, 70%, 45%, 0.3) 0px, transparent 50%);
+  /* Instrument-label numerals */
+  .instrument-num {
+    font-family: var(--font-heading-en);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1, "zero" 1;
+    font-weight: 500;
   }
 
-  .gradient-radial {
-    background: radial-gradient(circle at 50% 50%, var(--tw-gradient-stops));
-  }
-  
-  /* Premium Animations */
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  .animate-pulse-slow {
-    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-  
-  .animate-shimmer {
-    animation: shimmer 2s linear infinite;
-  }
-  
-  .animate-slide-up {
-    animation: slideUp 0.5s ease-out;
-  }
-  
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out;
+  /* Topographic contour background — subtle SVG-style layered lines */
+  .topo-bg {
+    background-image:
+      radial-gradient(ellipse 200% 80% at 50% -20%, var(--ambient-overlay), transparent 60%),
+      repeating-radial-gradient(circle at 30% 40%, transparent 0 40px, color-mix(in srgb, var(--soil-200) 25%, transparent) 40px 41px),
+      repeating-radial-gradient(circle at 30% 40%, transparent 0 80px, color-mix(in srgb, var(--soil-200) 20%, transparent) 80px 81px);
   }
 
-  .animate-slide-in-right {
-    animation: slideInRight 0.5s ease-out;
+  /* Tap feedback — <100ms scale */
+  .tap-feedback {
+    transition: transform var(--duration-fast) var(--ease-standard),
+                box-shadow var(--duration-fast) var(--ease-standard);
+  }
+  .tap-feedback:active {
+    transform: scale(0.97);
   }
 
-  .animate-scale-in {
-    animation: scaleIn 0.4s ease-out;
+  /* Health pulse — breathing animation for field tiles */
+  @keyframes health-pulse {
+    0%, 100% { opacity: 0.85; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.015); }
+  }
+  .health-pulse { animation: health-pulse 3.5s var(--ease-standard) infinite; }
+
+  @keyframes scanner-sweep {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  .scanner-sweep { animation: scanner-sweep 1.6s var(--ease-standard) infinite; }
+
+  @keyframes confidence-fill {
+    from { stroke-dashoffset: var(--circumference, 283); }
+    to { stroke-dashoffset: var(--target-offset, 0); }
   }
 
-  .animate-bounce-subtle {
-    animation: bounceSubtle 2s ease-in-out infinite;
+  @keyframes grow-in {
+    from { opacity: 0; transform: translateY(8px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
-  
-  /* Premium Shadow effects */
-  .shadow-glow {
-    box-shadow: 0 0 30px rgba(34, 197, 94, 0.4), 0 0 60px rgba(34, 197, 94, 0.2);
+  .grow-in { animation: grow-in var(--duration-reveal) var(--ease-emphasized) both; }
+
+  @keyframes shimmer-x {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
-  
-  .shadow-glow-lg {
-    box-shadow: 0 0 50px rgba(34, 197, 94, 0.5), 0 0 100px rgba(34, 197, 94, 0.3);
+  .shimmer {
+    background: linear-gradient(90deg,
+      color-mix(in srgb, var(--muted) 60%, transparent) 0%,
+      color-mix(in srgb, var(--muted) 90%, transparent) 50%,
+      color-mix(in srgb, var(--muted) 60%, transparent) 100%);
+    background-size: 200% 100%;
+    animation: shimmer-x 1.4s ease-in-out infinite;
   }
 
-  .shadow-glow-blue {
-    box-shadow: 0 0 30px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2);
-  }
-
-  .shadow-glow-purple {
-    box-shadow: 0 0 30px rgba(168, 85, 247, 0.4), 0 0 60px rgba(168, 85, 247, 0.2);
-  }
-  
-  .shadow-soft {
-    box-shadow: 0 4px 20px -3px rgba(0, 0, 0, 0.08), 0 12px 25px -2px rgba(0, 0, 0, 0.05);
-  }
-
-  .shadow-premium {
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15), 0 20px 50px -5px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Dark mode specific */
-  .dark .shadow-soft {
-    box-shadow: 0 4px 20px -3px rgba(0, 0, 0, 0.4), 0 12px 25px -2px rgba(0, 0, 0, 0.3);
-  }
-
-  .dark .shadow-premium {
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.6), 0 20px 50px -5px rgba(0, 0, 0, 0.4);
-  }
-  
-  /* Premium Hover effects */
-  .hover-lift {
-    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-premium hover:-translate-y-1;
-  }
-
-  .hover-lift-sm {
-    @apply transition-all duration-200 hover:scale-[1.01] hover:shadow-lg hover:-translate-y-0.5;
-  }
-  
-  .hover-glow {
-    @apply transition-all duration-300 hover:shadow-glow;
-  }
-
-  .hover-glow-blue {
-    @apply transition-all duration-300 hover:shadow-glow-blue;
-  }
-
-  .hover-glow-purple {
-    @apply transition-all duration-300 hover:shadow-glow-purple;
-  }
-
-  .hover-scale {
-    @apply transition-transform duration-300 hover:scale-105;
-  }
-
-  /* Text effects */
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-emerald-500 to-teal-600;
-  }
-
-  .text-gradient-blue {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-500 to-sky-600;
-  }
-
-  .text-gradient-purple {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-violet-500 to-indigo-600;
-  }
-
-  /* Border effects */
-  .border-gradient {
-    border-image: linear-gradient(to right, rgb(34, 197, 94), rgb(20, 184, 166)) 1;
-  }
-
-  /* Backdrop effects */
-  .backdrop-premium {
-    @apply backdrop-blur-2xl backdrop-saturate-150 backdrop-brightness-110;
+  /* Skeleton — exact layout match to avoid shift */
+  .skeleton-block {
+    background: color-mix(in srgb, var(--muted) 70%, transparent);
+    border-radius: var(--radius-sm);
   }
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
+/* ============ Reduced motion ============ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
+  .health-pulse,
+  .scanner-sweep,
+  .shimmer,
+  .grow-in {
+    animation: none !important;
   }
 }
 
-@keyframes slideUp {
-  0% {
+/* ============ Elevation Pass — Refined States ============ */
+
+/* Designed focus rings — crop-green glow matching element radius */
+:focus-visible {
+  outline: none !important;
+  box-shadow:
+    0 0 0 2px var(--background),
+    0 0 0 4px color-mix(in srgb, var(--crop-500) 70%, transparent),
+    0 0 12px 2px color-mix(in srgb, var(--crop-500) 35%, transparent) !important;
+  transition: box-shadow 120ms var(--ease-standard) !important;
+}
+.dark :focus-visible {
+  box-shadow:
+    0 0 0 2px var(--background),
+    0 0 0 4px color-mix(in srgb, var(--crop-400) 80%, transparent),
+    0 0 14px 3px color-mix(in srgb, var(--crop-400) 40%, transparent) !important;
+}
+/* For rounded elements, the box-shadow follows border-radius automatically */
+input:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+[role="option"]:focus-visible,
+[role="listbox"]:focus-visible,
+a:focus-visible {
+  outline: none !important;
+}
+
+/* Refined tap-feedback — genuine down-state with scale + shadow compression */
+.tap-feedback {
+  transition:
+    transform var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+  will-change: transform;
+}
+.tap-feedback:hover {
+  transform: translateY(-1px);
+}
+.tap-feedback:active {
+  transform: translateY(0) scale(0.975);
+}
+
+/* Card hover lift — for desktop pointer devices only */
+@media (hover: hover) and (pointer: fine) {
+  .card-hover-lift {
+    transition:
+      transform var(--duration-base) var(--ease-standard),
+      box-shadow var(--duration-base) var(--ease-standard),
+      border-color var(--duration-base) var(--ease-standard);
+  }
+  .card-hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: color-mix(in srgb, var(--crop-500) 30%, var(--border));
+  }
+}
+
+/* Map pin hover lift */
+.field-marker:hover > div {
+  transform: scale(1.12);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35) !important;
+  transition: transform 180ms var(--ease-emphasized), box-shadow 180ms var(--ease-emphasized);
+}
+
+/* Number roll — mechanical counter */
+@keyframes digit-roll-up {
+  from { transform: translateY(60%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes digit-roll-down {
+  from { transform: translateY(-60%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.digit-roll-up { animation: digit-roll-up 280ms var(--ease-emphasized) both; }
+.digit-roll-down { animation: digit-roll-down 280ms var(--ease-emphasized) both; }
+
+/* Lock-on snap — for diagnosis scan */
+@keyframes lock-on-snap {
+  0% { transform: scale(1.15); }
+  40% { transform: scale(0.94); }
+  70% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+.lock-on-snap { animation: lock-on-snap 420ms var(--ease-emphasized) both; }
+
+@keyframes reticle-pulse {
+  0%, 100% { opacity: 0.7; stroke-width: 1.5; }
+  50% { opacity: 1; stroke-width: 2.5; }
+}
+.reticle-pulse { animation: reticle-pulse 1.4s var(--ease-standard) infinite; }
+
+/* Weather-reactive ambient textures */
+@keyframes rain-fall {
+  0% { transform: translateY(-20%); opacity: 0; }
+  10% { opacity: 0.5; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(120%); opacity: 0; }
+}
+@keyframes sun-ray-sweep {
+  0%, 100% { transform: translateX(-30%) rotate(8deg); opacity: 0; }
+  50% { transform: translateX(30%) rotate(8deg); opacity: 0.5; }
+}
+@keyframes haze-drift {
+  0% { transform: translateX(-10%); opacity: 0.3; }
+  50% { opacity: 0.5; }
+  100% { transform: translateX(10%); opacity: 0.3; }
+}
+
+/* Ripple — for field card → detail transition */
+@keyframes ripple-expand {
+  from {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(4);
     opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
+.ripple-expand { animation: ripple-expand 600ms var(--ease-emphasized) both; }
 
-@keyframes fadeIn {
-  0% {
+/* Shared element morph */
+@keyframes morph-in {
+  from {
     opacity: 0;
+    transform: scale(0.96) translateY(8px);
   }
-  100% {
+  to {
     opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
+.morph-in { animation: morph-in 380ms var(--ease-emphasized) both; }
 
-@keyframes slideInRight {
-  0% {
+/* Sparkline last-point pulse */
+@keyframes last-point-pulse {
+  0%, 100% { r: 2.5; opacity: 1; }
+  50% { r: 4; opacity: 0.7; }
+}
+.last-point-pulse { animation: last-point-pulse 2.2s var(--ease-standard) infinite; }
+
+/* Custom tooltip — grow from point */
+@keyframes tooltip-grow {
+  from {
     opacity: 0;
-    transform: translateX(30px);
+    transform: translateY(4px) scale(0.95);
   }
-  100% {
+  to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0) scale(1);
   }
 }
+.tooltip-grow { animation: tooltip-grow 180ms var(--ease-emphasized) both; }
 
-@keyframes scaleIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+/* Empty state illustration drift */
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.drift { animation: drift 3.2s var(--ease-standard) infinite; }
+
+/* ============ Leaflet custom restyling ============ */
+.leaflet-container {
+  background: var(--soil-200) !important;
+  font-family: var(--font-body) !important;
+}
+.leaflet-control-zoom a {
+  background: var(--card) !important;
+  color: var(--foreground) !important;
+  border-color: var(--border) !important;
+  font-family: var(--font-heading-en) !important;
+  font-weight: 600 !important;
+}
+.leaflet-control-zoom a:hover {
+  background: var(--accent) !important;
+  color: var(--accent-foreground) !important;
+}
+.leaflet-control-attribution {
+  background: color-mix(in srgb, var(--card) 80%, transparent) !important;
+  color: var(--muted-foreground) !important;
+  font-size: 10px !important;
+}
+.leaflet-control-attribution a { color: var(--sky-600) !important; }
+.dark .leaflet-control-attribution a { color: var(--sky-400) !important; }
+
+/* Touch-friendly vertex handles */
+.field-vertex {
+  width: 22px;
+  height: 22px;
+  background: var(--crop-500);
+  border: 3px solid #FFFFFF;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  cursor: grab;
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+.field-vertex:active { cursor: grabbing; transform: scale(1.15); }
+
+/* Focus rings — visible, high-contrast */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }
 
-@keyframes bounceSubtle {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+/* 200% zoom readability — base font size floor */
+html { font-size: 16px; }
+@media (max-width: 380px) {
+  html { font-size: 15px; }
 }

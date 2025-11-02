@@ -1,410 +1,99 @@
 <div align="center">
+  <img src="public/favicon.ico" alt="Bhoomi Logo" width="120" />
 
-# 🌾 AgriVision AI
+  # Bhoomi AI
 
-### AI-Powered Agricultural Intelligence Platform
+  **Next-Generation Field Intelligence & AI Agronomy for Modern Farmers**
 
-[![Next.js](https://img.shields.io/badge/Next.js-15.3-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![Google Gemini](https://img.shields.io/badge/Google_Gemini-AI-4285F4?style=for-the-badge&logo=google)](https://ai.google.dev/)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+  [![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+  [![Gemini AI](https://img.shields.io/badge/Google_Gemini-Flash_1.5-blue?style=for-the-badge&logo=google)](https://ai.google.dev/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-**Empowering farmers with AI-driven insights for sustainable and profitable agriculture**
-
-[Features](#-features) • [Installation](#-installation) • [Tech Stack](#-tech-stack) • [Contributing](#-contributing)
-
+  *Empowering precision agriculture with real-time analytics, machine learning, and intuitive design.*
 </div>
 
 ---
-
-## 📖 About
-
-AgriVision AI is a comprehensive agricultural decision-support platform that leverages cutting-edge artificial intelligence to provide farmers with actionable insights. Built specifically for Indian farmers, the platform offers multilingual support and addresses real-world agricultural challenges through intelligent data analysis.
-
-### 🎯 Problem Statement
-
-Farmers face numerous challenges:
-- Unpredictable crop yields
-- Pest and disease identification
-- Soil health management
-- Market price volatility
-- Language barriers in accessing technology
-
-### 💡 Our Solution
-
-AgriVision AI provides:
-- **AI-powered crop yield predictions** using multi-factor analysis
-- **Intelligent pest & disease diagnosis** from plant images
-- **Soil analysis & recommendations** for optimal crop selection
-- **Real-time weather data** integration
-- **Market price tracking** for informed selling decisions
-- **Multilingual interface** (English, Hindi, Odia, Telugu)
-- **Interactive field management** with map-based tools
-
----
-
-## ✨ Features
-
-### 🌱 Core Features
-
-| Feature | Description |
-|---------|-------------|
-| **🎯 Yield Prediction** | AI-powered predictions using field data, weather, and soil conditions |
-| **🐛 Pest & Disease Detection** | Image-based diagnosis with treatment recommendations |
-| **🧪 Soil Analysis** | NPK analysis with crop recommendations and fertility reports |
-| **🗺️ Field Management** | Interactive map-based field drawing and area calculation |
-| **🌤️ Weather Integration** | Real-time weather data with 7-day forecasts |
-| **💰 Market Prices** | Live market price tracking for major crops |
-| **🌍 Multilingual** | Support for 4 Indian languages with text-to-speech |
-| **📊 Analytics Dashboard** | Comprehensive insights and data visualization |
-
-### 🎨 Design Features
-
-- **Premium Glass Morphism** - Modern, depth-rich UI
-- **Advanced Gradients** - Multi-color transitions and mesh backgrounds
-- **Smooth Animations** - 60fps GPU-accelerated effects
-- **Dark Mode** - Fully optimized dark theme
-- **Responsive Design** - Works on all devices
-- **Accessibility** - WCAG compliant with screen reader support
-
----
-
-
-## 🚀 Installation
-
-### Prerequisites
-
-- **Node.js** 20.x or later
-- **npm** or **yarn**
-- **Google Gemini API Key** (Free tier available)
-
-### Quick Start
-
-1. **Clone the repository**
-
-```bash
-git clone https://github.com/Dhuvie/agrivision-ai.git
-cd agrivision-ai
-```
-
-2. **Install dependencies**
-
-```bash
-npm install
-# or
-yarn install
-```
-
-3. **Set up environment variables**
-
-Create a `.env.local` file in the root directory:
-
-```env
-# Google Gemini API Key (Required)
-GEMINI_API_KEY=your_gemini_api_key_here
-```
-
-**Get your API key:**
-- Visit [Google AI Studio](https://aistudio.google.com/app/apikey)
-- Click "Create API key"
-- Copy and paste into `.env.local`
-
-4. **Run the development server**
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-5. **Open your browser**
-
-Navigate to [http://localhost:9002](http://localhost:9002)
-
-### Build for Production
-
-```bash
-npm run build
-npm start
-```
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-
-- **[Next.js 15.3](https://nextjs.org/)** - React framework with App Router
-- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe development
-- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first styling
-- **[Radix UI](https://www.radix-ui.com/)** - Accessible component primitives
-- **[Lucide React](https://lucide.dev/)** - Beautiful icons
-- **[Recharts](https://recharts.org/)** - Data visualization
-- **[Leaflet](https://leafletjs.com/)** - Interactive maps
-
-### AI & Backend
-
-- **[Google Gemini](https://ai.google.dev/)** - Generative AI models
-- **Custom ML Model** - Crop prediction (Python/FastAPI)
-- **FastAPI** - Python backend for ML predictions
-
-### State Management
-
-- **React Context API** - Global state
-- **Local Storage** - Data persistence
-- **React Hook Form** - Form management
-- **Zod** - Schema validation
-
-### Development Tools
-
-- **ESLint** - Code linting
-- **Prettier** - Code formatting
-- **TypeScript** - Type checking
-
----
-
-## 📁 Project Structure
-
-```
-agrivision-ai/
-├── src/
-│   ├── app/                    # Next.js App Router
-│   │   ├── (routes)/          # Application routes
-│   │   ├── api/               # API routes
-│   │   ├── globals.css        # Global styles
-│   │   └── layout.tsx         # Root layout
-│   ├── components/
-│   │   ├── agrivision/        # Feature components
-│   │   └── ui/                # Reusable UI components
-│   ├── contexts/              # React contexts
-│   │   ├── FieldsContext.tsx  # Field management
-│   │   └── LanguageContext.tsx # Internationalization
-│   ├── lib/
-│   │   ├── translations.ts    # i18n translations
-│   │   └── utils.ts           # Utility functions
-│   └── ai/
-│       ├── flows/             # AI workflows
-│       └── prompts/           # AI prompts
-├── public/                    # Static assets
-├── .env.local                 # Environment variables
-├── package.json               # Dependencies
-├── tailwind.config.ts         # Tailwind configuration
-└── tsconfig.json             # TypeScript configuration
-```
-
----
-
-## 🌍 Multilingual Support
-
-AgriVision AI supports 4 languages:
-
-| Language | Code | Status |
-|----------|------|--------|
-| 🇬🇧 English | `en` | ✅ Complete |
-| 🇮🇳 Hindi (हिंदी) | `hi` | ✅ Complete |
-| 🇮🇳 Odia (ଓଡ଼ିଆ) | `or` | ✅ Complete |
-| 🇮🇳 Telugu (తెలుగు) | `te` | ✅ Complete |
-
-### Adding New Languages
-
-1. Add translations to `src/lib/translations.ts`
-2. Update the `Translation` type
-3. Add language option in Settings
-
----
-
-## 🎨 Design System
-
-### Color Palette
-
-```css
-/* Primary (Green) */
---primary: 142 70% 45%;
-
-/* Secondary (Blue) */
---secondary: 221 83% 53%;
-
-/* Accent (Amber) */
---accent: 43 74% 66%;
-```
-
-### Components
-
-All components follow:
-- **Accessibility** standards (WCAG 2.1)
-- **Responsive** design (mobile-first)
-- **Dark mode** support
-- **Animation** best practices
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Here's how you can help:
-
-### Ways to Contribute
-
-- 🐛 **Report bugs** - Open an issue
-- 💡 **Suggest features** - Share your ideas
-- 📝 **Improve documentation** - Fix typos, add examples
-- 🌍 **Add translations** - Support more languages
-- 💻 **Submit code** - Fix bugs, add features
-
-### Development Workflow
-
-1. **Fork the repository**
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Make your changes**
-4. **Commit with clear messages**
-   ```bash
-   git commit -m "Add: Amazing new feature"
-   ```
-5. **Push to your fork**
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-6. **Open a Pull Request**
-
-### Code Style
-
-- Follow existing code patterns
-- Use TypeScript for type safety
-- Write meaningful commit messages
-- Add comments for complex logic
-- Test your changes thoroughly
-
----
-
-## 📝 API Documentation
-
-### AI Flows
-
-#### Yield Prediction
-
-```typescript
-import { predictYieldFromPrompt } from '@/ai/flows/predict-yield-flow';
-
-const result = await predictYieldFromPrompt({
-  fieldDescription: "5 acre wheat field",
-  weatherData: { temp: 25, humidity: 70 },
-  soilData: { N: 50, P: 40, K: 30 }
-});
-```
-
-#### Pest Detection
-
-```typescript
-import { diagnosePestDisease } from '@/ai/flows/diagnose-pest-disease-flow';
-
-const diagnosis = await diagnosePestDisease({
-  imageUrl: "data:image/jpeg;base64,...",
-  cropType: "wheat"
-});
-```
-
-### Custom ML Model
-
-The Python FastAPI backend provides:
-
-```python
-# Endpoint: POST /predict
-{
-  "N": 50,
-  "P": 40,
-  "K": 30,
-  "temperature": 25,
-  "humidity": 70,
-  "ph": 6.5,
-  "rainfall": 100
-}
-```
-
----
-
-## 🔒 Security
-
-- **API Keys** - Never commit `.env.local` to version control
-- **Input Validation** - All user inputs are validated with Zod
-- **XSS Protection** - React's built-in protection
-- **CORS** - Configured for production domains
-
-
----
-
-## 📊 Performance
-
-### Lighthouse Scores
-
-| Metric | Score |
-|--------|-------|
-| Performance | 95+ |
-| Accessibility | 100 |
-| Best Practices | 100 |
-| SEO | 100 |
-
-### Optimizations
-
-- ⚡ **Next.js App Router** - Automatic code splitting
-- 🖼️ **Image Optimization** - Next/Image component
-- 🎨 **CSS-in-JS** - Tailwind CSS (JIT)
-- 📦 **Bundle Size** - Tree shaking enabled
-- 🚀 **Edge Functions** - Deployed on Vercel Edge
-
----
-
-## 🧪 Testing
-
-```bash
-# Run type checking
-npm run typecheck
-
-# Run linting
-npm run lint
-
-# Build test
-npm run build
-```
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 👥 Team
 
 <div align="center">
-
-### Built with ❤️ for Indian Farmers
-
-**AgriVision AI Team**
-
-[GitHub](https://github.com/Dhuvie/agrivision-ai) 
+  <img src="public/screenshots/hero.png" alt="Bhoomi AI Dashboard Overview" width="100%" style="border-radius: 12px; box-shadow: 0px 10px 30px rgba(0,0,0,0.15);" />
 </div>
 
+<br/>
+
+Bhoomi is a premium, AI-powered agricultural intelligence platform designed to bridge the gap between traditional farming and modern data science. By leveraging state-of-the-art vision models and localized agronomic data, Bhoomi delivers precision insights directly to the farmer.
+
+## ✨ Premium Features
+
+- 🌾 **Yield Forecasting & Analytics** — Harness local environmental datasets, soil health indicators, and crop stages to predict harvests with high accuracy.
+- 🔬 **AI-Powered Diagnostics** — Instant, real-time disease and pest identification using Gemini Vision models. Snap a picture of a leaf and receive localized, actionable treatments.
+- 🌱 **Intelligent Soil Management** — Input NPK and pH levels to receive tailored, dynamically generated crop suitability matrices and fertilizer regimens.
+- 🎙️ **Multilingual Voice Assistant** — Speak directly to the platform in English, Hindi, Odia, or Telugu. Natural language processing instantly translates and answers complex agricultural queries.
+- 📱 **Seamless UX & Micro-interactions** — Built with a stunning dark mode aesthetic, smooth transitions, and high-performance tactile feedback.
+
 ---
 
-## 🙏 Acknowledgments
+## 🎨 Visual Showcase
 
-- **Google Gemini** - For powerful AI capabilities
-- **Next.js Team** - For the amazing framework
-- **Radix UI** - For accessible components
-- **Indian Farmers** - For inspiring this project
+Experience the sleek, modern interface of Bhoomi AI.
+
+<table align="center" style="border-collapse: collapse; border: none; width: 100%;">
+  <tr>
+    <td align="center" width="50%" style="border: none; padding: 10px;">
+      <b>Global Dashboard</b><br/>
+      <img src="public/screenshots/dashboard.png" alt="Global Dashboard" width="100%" style="border-radius: 8px; box-shadow: 0px 4px 15px rgba(0,0,0,0.1);"/>
+    </td>
+    <td align="center" width="50%" style="border: none; padding: 10px;">
+      <b>Field Tracking</b><br/>
+      <img src="public/screenshots/fields.png" alt="Field Management" width="100%" style="border-radius: 8px; box-shadow: 0px 4px 15px rgba(0,0,0,0.1);"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%" style="border: none; padding: 10px;">
+      <b>AI Disease Diagnosis</b><br/>
+      <img src="public/screenshots/diagnose.png" alt="AI Leaf Diagnosis" width="100%" style="border-radius: 8px; box-shadow: 0px 4px 15px rgba(0,0,0,0.1);"/>
+    </td>
+    <td align="center" width="50%" style="border: none; padding: 10px;">
+      <b>Agronomic Insights</b><br/>
+      <img src="public/screenshots/insights.png" alt="Yield Insights" width="100%" style="border-radius: 8px; box-shadow: 0px 4px 15px rgba(0,0,0,0.1);"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="100%" colspan="2" style="border: none; padding: 10px;">
+      <b>Live Market Prices</b><br/>
+      <img src="public/screenshots/market.png" alt="Market Prices" width="50%" style="border-radius: 8px; box-shadow: 0px 4px 15px rgba(0,0,0,0.1);"/>
+    </td>
+  </tr>
+</table>
 
 ---
 
+## 🏗️ Architecture
 
+Bhoomi relies on a scalable, serverless architecture utilizing the **Google Gemini API** for core intelligent features:
+* **Computer Vision**: Gemini 1.5 Flash processes localized crop images with minimal latency.
+* **LLM Engine**: Advanced prompt engineering processes localized contexts (weather, soil, voice inputs) to structure complex JSON agronomy plans.
+* **UI/UX**: Radix primitives paired with Tailwind CSS for high-performance, accessible components.
 
-### ⭐ Star us on GitHub!
+## 🚀 Getting Started
 
-If you find AgriVision AI helpful, please consider giving us a star ⭐
+Ensure you have Node.js 18+ and a valid Gemini API key.
 
-**Made with 🌾 for a better agricultural future**
+```bash
+# Clone and install dependencies
+npm install
 
+# Setup environment variables
+echo "GEMINI_API_KEY=your_key_here" > .env.local
+
+# Launch the platform
+npm run dev
+```
+
+Platform boots up immediately at [http://localhost:3000](http://localhost:3000).
+
+---
+
+<div align="center">
+  <sub>Engineered with precision for the future of agriculture.</sub>
 </div>
