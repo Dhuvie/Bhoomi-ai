@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/favicon.ico" alt="Bhoomi Logo" width="120" />
+  <img src="src/app/icon.png" alt="Bhoomi Logo" width="120" />
 
   # Bhoomi AI
 
